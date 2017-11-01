@@ -1,0 +1,57 @@
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import SliderTile from './components/SliderTile'
+// import 'images/rhino.jpg'
+
+class App extends Component {
+  constructor(props){
+    super(props)
+    this.state= {
+      canvas: 0
+
+    }
+
+
+  }
+
+  componentDidMount(){
+    let canvas = ReactDOM.findDOMNode(this.refs.myCanvas);
+    let ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'rgb(200,0,0)';
+    ctx.fillRect(10, 10, 55, 50);
+    this.setState({canvas: canvas})
+  }
+
+  changeSliderValue(sliderId){
+    let sliderValue = document.getElementById(sliderId).valueAsNumber;
+    let sliderString = `rgb(${sliderValue},0,0)`;
+
+    let canvas = ReactDOM.findDOMNode(this.refs.myCanvas);
+    let ctx = canvas.getContext('2d');
+    ctx.fillStyle = sliderString;
+    ctx.fillRect(10, 10, 55, 50);
+  }
+
+  render(){
+    let changeInSlider = () => {
+      this.changeSliderValue("1")
+    }
+    return(
+      <div>
+          <canvas ref="myCanvas" />
+          <div>
+            <SliderTile
+              key = {1}
+              id = {"1"}
+              value = {"255"}
+              handleChange={changeInSlider}
+            />
+            <h3>This is rendered in react</h3>
+          </div>
+      </div>
+    )
+  }
+}
+
+export default App

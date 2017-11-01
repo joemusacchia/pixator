@@ -1,0 +1,7 @@
+<h3>Can I load this into the erb file?</h3>
+
+<canvas id="canvas" width="300" height="227"></canvas>
+
+<div id="app">
+
+</div>
