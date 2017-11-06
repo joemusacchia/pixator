@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+
+body {
+  font-family: 'Audiowide', cursive;
+  background-color: #EDEDF4;
+}
+
+.image-tile-container {
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin: 10px;
+  box-shadow: 0px 0px 3px gray;
+  padding: 5px;
+}
+
+.image-tile {
+  width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+  margin: 5px;
+}

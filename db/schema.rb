@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101183653) do
+ActiveRecord::Schema.define(version: 20171105172722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,21 +20,40 @@ ActiveRecord::Schema.define(version: 20171101183653) do
     t.bigint "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "body", null: false
     t.index ["image_id"], name: "index_comments_on_image_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "images", force: :cascade do |t|
-    t.string "file_name", null: false
+  create_table "edits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "upload_id", null: false
     t.integer "slider_r", default: 255, null: false
     t.integer "slider_g", default: 255, null: false
     t.integer "slider_b", default: 255, null: false
-    t.string "text_body", default: "", null: false
-    t.boolean "edited", default: false, null: false
+    t.string "text_body", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["upload_id"], name: "index_edits_on_upload_id"
+    t.index ["user_id"], name: "index_edits_on_user_id"
+  end
+
+  create_table "exports", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "image_id", null: false
+    t.string "share", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_exports_on_image_id"
+    t.index ["user_id"], name: "index_exports_on_user_id"
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.string "file", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_images_on_user_id"
+    t.index ["user_id"], name: "index_uploads_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

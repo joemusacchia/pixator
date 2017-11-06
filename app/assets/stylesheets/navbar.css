@@ -1,0 +1,13 @@
+.nav-bar {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
+.user-links {
+  text-align: right;
+  display: inline-block;
+}
+
+.title-link {
+  
+}

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  has_many :images
+  has_many :uploads
   has_many :comments
+  has_many :exports
+  has_many :edits
 
   validates :first_name, presence: true
   validates :last_name, presence: true

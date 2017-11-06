@@ -1,4 +1,4 @@
-class FileNameUploader < CarrierWave::Uploader::Base
+class ShareUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
