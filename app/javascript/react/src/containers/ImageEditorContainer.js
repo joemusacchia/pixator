@@ -17,7 +17,7 @@ class ImageEditorContainer extends Component {
     let that = this;
     let user_id = this.props.params.user_id;
     let id = this.props.params.id;
-    fetch(`/users/${user_id}/uploads/${id}.json`, {
+    fetch(`/users/${user_id}/uploads/${id}`, {
       credentials: 'same-origin',
       method: 'GET',
       headers: { 'Content-Type':'application/json'}

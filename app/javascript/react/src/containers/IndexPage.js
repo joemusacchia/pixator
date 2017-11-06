@@ -106,7 +106,17 @@ class IndexPage extends Component {
     }
 
     let exportedImageTiles;
-    if (this.state.exports > 0) {
+    if (this.state.exports.length > 0) {
+      exportedImageTiles = this.state.exports.map(exportedImage => {
+        return(
+          <ImageTile
+            key = {new Date().getTime() + exportedImage.id}
+            id = {exportedImage.id}
+            image = {exportedImage.share}
+            user_id = {exportedImage.user_id}
+          />
+        )
+      })
 
     } else {
       exportedImageTiles = <p>You haven't saved any photos yet for comments!</p>
