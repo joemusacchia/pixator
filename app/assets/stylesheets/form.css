@@ -1,0 +1,44 @@
+/*@import url('https://fonts.googleapis.com/css?family=Ropa+Sans');*/
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');
+
+.login-page {
+  position: absolute;
+  width: 200px;
+  margin: auto;
+  top: 10%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+
+.form-container {
+  /*font-family: 'Ropa Sans', sans-serif;*/
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
+.actions input {
+  margin: 20px auto;
+  font-size: 16px;
+  border: 0;
+  padding: 10px 20px;
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+
+}
+
+.actions input:hover{
+  background-color: #C2CBCE;
+}
+
+.title-of-site p {
+  font-size: 52px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+p.alert{
+
+}

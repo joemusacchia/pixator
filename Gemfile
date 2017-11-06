@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.5'
 ### joemusacchia added these gems
 gem 'foundation-rails'
 gem 'webpacker'
+gem 'devise'
+gem 'carrierwave', '~>1.0'
+gem 'fog'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -37,6 +40,7 @@ group :development, :test do
   gem 'factory_girl'
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
+  gem 'dotenv-rails'
 end
 
 group :development do
