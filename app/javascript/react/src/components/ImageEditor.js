@@ -24,6 +24,7 @@ class ImageEditor extends Component {
     let img = new Image();
     // img.src = 'https://s3.amazonaws.com/starcation-new-development/uploads/celestial/photo/1/Jupiter_and_its_shrunken_Great_Red_Spot.jpg';
     img.crossOrigin = "Anonymous";
+    // img.src = this.state.current_image.file.url + "?edit=1"
     img.src = this.state.current_image.file.url
     img.onload = function() {
       let canvasOringinal = document.getElementById('myCanvas');
