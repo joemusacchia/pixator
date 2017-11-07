@@ -13,38 +13,6 @@ class ImageEditor extends Component {
     }
   }
 
-  // // get initial state before the page renders via GET/fetch
-  // componentWillMount(){
-  //   let that = this;
-  //   let user_id = this.props.params.user_id;
-  //   let id = this.props.params.id;
-  //   fetch(`/users/${user_id}/uploads/${id}.json`, {
-  //     credentials: 'same-origin',
-  //     method: 'GET',
-  //     headers: { 'Content-Type':'application/json'}
-  //   })
-  //   .then(response => {
-  //     if (response.ok) {
-  //       return response;
-  //     } else {
-  //       let errorMessage = `${response.status} (${response.statusText})`,
-  //       error = new Error(errorMessage);
-  //       throw(error);
-  //     }
-  //   })
-  //   .then(response => response.json())
-  //   .then(body => {
-  //     // debugger
-  //     that.setState({
-  //       current_user: body.current_user,
-  //       current_image: body.clicked_image,
-  //       current_edit: body.specific_edit
-  //
-  //     })
-  //   })
-  //   .catch(error => console.error(`Error in fetch: ${error.message}`));
-  // }
-
   // page will only render on page load
   shouldComponentUpdate(){
     return false

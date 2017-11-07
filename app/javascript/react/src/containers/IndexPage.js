@@ -91,6 +91,8 @@ class IndexPage extends Component {
             id = {upload.id}
             image = {upload.file}
             user_id = {upload.user_id}
+            image_type_flag = {1}
+            upload_id = {upload.id}
           />
         )
       })
@@ -114,6 +116,8 @@ class IndexPage extends Component {
             id = {exportedImage.id}
             image = {exportedImage.share}
             user_id = {exportedImage.user_id}
+            image_type_flag = {3}
+            upload_id = {exportedImage.upload_id}
           />
         )
       })
