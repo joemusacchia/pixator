@@ -248,27 +248,52 @@ class ImageEditor extends Component {
 
         let user_id = that.state.current_user.user_id
         let upload_id = that.state.current_image.id
-        fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits`,{
-          credentials: 'same-origin',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify({ editorState: statePayLoad })
-        })
-        .then(response => {
-          if (response.status === 204) {
-            let editSuccessful = document.getElementById("save-notice");
-            editSuccessful.innerHTML = "Edit saved sucessfully"
-          }
-        })
+        if ((Object.keys(that.state.current_edit).length === 0) || (that.state.current_edit.user_id != user_id)) {
+          fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits`,{
+            credentials: 'same-origin',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({ editorState: statePayLoad })
+          })
+          .then(response => {
+            if (response.status === 204) {
+              let editSuccessful = document.getElementById("save-notice");
+              editSuccessful.innerHTML = "Edit saved sucessfully"
+            }
+          })
+
+        } else if (that.state.current_edit.user_id === user_id) {
+          let edit_id = that.state.current_edit.id
+          fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits/${edit_id}`,{
+            credentials: 'same-origin',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: 'PATCH',
+            body: JSON.stringify({ editorState: statePayLoad })
+          })
+          .then(response => {
+            if (response.status === 204) {
+              let editSuccessful = document.getElementById("save-notice");
+              editSuccessful.innerHTML = "Edit saved sucessfully"
+            }
+          })
+        }
 
         // that.setState({current_edit: sliderRValue})
       }
 
       let saveStateButton = document.getElementById('save-state-button')
       saveStateButton.addEventListener('click', saveEditorState)
+
+
+
+
+
 
 
 
