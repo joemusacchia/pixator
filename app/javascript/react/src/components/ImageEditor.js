@@ -27,12 +27,15 @@ class ImageEditor extends Component {
     // img.src = this.state.current_image.file.url + "?edit=1"
     img.src = this.state.current_image.file.url
     img.onload = function() {
+      // grab initial data;
       let canvasOringinal = document.getElementById('myCanvas');
+      canvasOringinal.setAttribute("width", `${img.naturalWidth}`)
+      canvasOringinal.setAttribute("height", `${img.naturalHeight}`)
       let ctxOriginal = canvasOringinal.getContext('2d');
-      ctxOriginal.drawImage(img, 0, 0);
-      ctxOriginal.textBaseline = 'top';
-      ctxOriginal.font = "100px Arial"
-      ctxOriginal.fillStyle = '#ffffff'
+      ctxOriginal.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+      // ctxOriginal.textBaseline = 'top';
+      // ctxOriginal.font = "100px Arial"
+      // ctxOriginal.fillStyle = '#ffffff'
       // ctxOriginal.fillText("Joe", 10, 10);
       img.style.display = 'none';
       let originalImageData = ctxOriginal.getImageData(0, 0, canvasOringinal.width, canvasOringinal.height)
@@ -42,19 +45,47 @@ class ImageEditor extends Component {
     }
 
     function changeSliderValue(img, originalData, that) {
+      //set initial state of canvas
       let canvas = document.getElementById('myCanvas');
       let ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
       ctx.fillStyle = '#ffffff'
       // ctx.fillText("Joe", 10, 10);
       img.style.display = 'none';
       let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       let data = imageData.data;
-      let textToPaint = "Joe"
-
-
 
       let sliderR = document.getElementById('1');
+      let sliderG = document.getElementById('2');
+      let sliderB = document.getElementById('3');
+      let textToPaint = ""
+
+
+      if (Object.keys(that.state.current_edit).length != 0) {
+        textToPaint = that.state.current_edit.text_body
+
+        let getRSliderFloat = sliderR.valueAsNumber/255
+        let getGSliderFloat = sliderG.valueAsNumber/255
+        let getBSliderFloat = sliderB.valueAsNumber/255
+
+        let i
+        for (i = 0; i < data.length; i += 4) {
+          data[i] = Math.round(originalData[i] * getRSliderFloat)
+          data[i + 1] = Math.round(originalData[i + 1] * getGSliderFloat)
+          data[i + 2] = Math.round(originalData[i + 2] * getBSliderFloat)
+        }
+        ctx.textBaseline = 'top';
+        ctx.font = "100px Arial"
+        ctx.putImageData(imageData, 0, 0)
+        ctx.fillStyle = '#ffffff'
+        ctx.fillText(textToPaint, 10, 10);
+      }
+
+
+
+
+
+
 
       let changeRChannel = () => {
         // console.log(sliderR.valueAsNumber)
@@ -68,9 +99,9 @@ class ImageEditor extends Component {
         ctx.putImageData(imageData, 0, 0)
         ctx.fillStyle = '#ffffff'
         ctx.fillText(textToPaint, 10, 10);
+        that.setState({})
       }
 
-      let sliderG = document.getElementById('2');
 
       let changeGChannel = () => {
         // console.log(sliderG.valueAsNumber)
@@ -86,7 +117,6 @@ class ImageEditor extends Component {
         ctx.fillText(textToPaint, 10, 10);
       }
 
-      let sliderB = document.getElementById('3');
 
       let changeBChannel = () => {
         // console.log(sliderB.valueAsNumber)
@@ -238,42 +268,116 @@ class ImageEditor extends Component {
       let saveStateButton = document.getElementById('save-state-button')
       saveStateButton.addEventListener('click', saveEditorState)
 
+
+
+      let canvasTextField = document.getElementById("canvasText")
+
+      let handleTextChange = (event) => {
+        textToPaint = event.target.value
+        let getRSliderFloat = sliderR.valueAsNumber/255
+        let getGSliderFloat = sliderG.valueAsNumber/255
+        let getBSliderFloat = sliderB.valueAsNumber/255
+
+        let i
+        for (i = 0; i < data.length; i += 4) {
+          data[i] = Math.round(originalData[i] * getRSliderFloat)
+          data[i + 1] = Math.round(originalData[i + 1] * getGSliderFloat)
+          data[i + 2] = Math.round(originalData[i + 2] * getBSliderFloat)
+        }
+        ctx.textBaseline = 'top';
+        ctx.font = "100px Arial"
+        ctx.putImageData(imageData, 0, 0)
+        ctx.fillStyle = '#ffffff'
+        ctx.fillText(textToPaint, 10, 10);
+
+      }
+
+      canvasTextField.addEventListener('change', handleTextChange)
+      canvasTextField.addEventListener('keyup', handleTextChange)
+
+      // let textAreaElement = document.getElementById("canvasText");
+      //
+      // textAreaElement.onkeyup = function() {
+      //   textToPaint = textAreaElement.value
+      //   let getRSliderFloat = sliderR.valueAsNumber/255
+      //   let getGSliderFloat = sliderG.valueAsNumber/255
+      //   let getBSliderFloat = sliderB.valueAsNumber/255
+      //
+      //   let i
+      //   for (i = 0; i < data.length; i += 4) {
+      //     data[i] = Math.round(originalData[i] * getRSliderFloat)
+      //     data[i + 1] = Math.round(originalData[i + 1] * getGSliderFloat)
+      //     data[i + 2] = Math.round(originalData[i + 2] * getBSliderFloat)
+      //   }
+      //   ctx.textBaseline = 'top';
+      //   ctx.font = "100px Arial"
+      //   ctx.putImageData(imageData, 0, 0)
+      //   ctx.fillStyle = '#ffffff'
+      //   ctx.fillText(textToPaint, 10, 10);
+      // }
+
+
+
     }
   }
 
   render(){
+    let redValue;
+    let greenValue;
+    let blueValue;
+    if (Object.keys(this.state.current_edit).length === 0) {
+      redValue = "255";
+      greenValue = "255";
+      blueValue = "255";
+    } else {
+      redValue = `${this.state.current_edit.slider_r}`
+      greenValue = `${this.state.current_edit.slider_g}`
+      blueValue = `${this.state.current_edit.slider_b}`
+    }
     return(
       <div>
         {/* <canvas id="myCanvas" width="300" height="227"/> */}
-        <canvas id="myCanvas" width="500" height="500"/>
-          <div>
-            <SliderTile
-              key = {1}
-              id = {"1"}
-              value = {"255"}
-            />
-          </div>
-          <div>
-            <SliderTile
-              key = {2}
-              id = {"2"}
-              value = {"255"}
-            />
-          </div>
-          <div>
-            <SliderTile
-              key = {3}
-              id = {"3"}
-              value = {"255"}
-            />
-            <div>
-              <button id="upload-button">Upload image</button>
-            </div>
-            <div>
-              <button id="save-state-button">Save edit</button>
-            </div>
-          </div>
-          <h3>This is rendered in react</h3>
+        {/* <canvas id="myCanvas" width="500" height="500"/> */}
+        <canvas id="myCanvas"/>
+        <div>
+          <SliderTile
+            key = {1}
+            id = {"1"}
+            value = {redValue}
+          />
+        </div>
+        <div>
+          <SliderTile
+            key = {2}
+            id = {"2"}
+            value = {greenValue}
+          />
+        </div>
+        <div>
+          <SliderTile
+            key = {3}
+            id = {"3"}
+            value = {blueValue}
+          />
+        </div>
+        <div>
+          <form>
+            <label>Text onto canvas
+              <input
+                id={"canvasText"}
+                name={"canvasText"}
+                type="text"
+              />
+            </label>
+          </form>
+        </div>
+        <div>
+          <button id="upload-button">Upload image</button>
+        </div>
+        <div>
+          <button id="save-state-button">Save edit</button>
+        </div>
+        <h3>This is rendered in react</h3>
       </div>
     )
   }

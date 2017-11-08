@@ -101,8 +101,25 @@ class IndexPage extends Component {
     }
 
     let editedImageTiles;
-    if (this.state.edits > 0) {
-
+    if (this.state.edits.length > 0) {
+      editedImageTiles = this.state.edits.map(edit =>{
+        let editedUpload;
+        this.state.uploads.forEach(upload => {
+          if (upload.id === edit.upload_id) {
+            editedUpload = upload
+          }
+        })
+        return(
+          <ImageTile
+            key = {new Date().getTime() + edit.id}
+            id = {edit.id}
+            image = {editedUpload.file}
+            user_id = {edit.user_id}
+            image_type_flag = {2}
+            upload_id = {edit.upload_id}
+          />
+        )
+      })
     } else {
       editedImageTiles = <p>You haven't edited any photos yet!</p>
     }

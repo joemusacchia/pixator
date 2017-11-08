@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :uploads, only: [:index]
+      resources :edits, only: [:show]
       resources :users, only: [] do
         resources :uploads, only: [:create] do
           resources :edits, only: [:create, :update]
