@@ -8,8 +8,7 @@ class Api::V1::UploadsController < ApplicationController
     newImage.file = params["file"]
     newImage.user = current_user
     if newImage.save
-      # render json: Upload.last
-      redirect_to root_path
+      render json: Upload.last
     end
   end
 
