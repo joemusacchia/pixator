@@ -21,6 +21,17 @@ class Api::V1::EditsController < ApplicationController
 
   def update
   end
+
+  def show
+    edit_id = params["id"]
+    current_edit = Edit.find_by(id: edit_id)
+    current_image = Upload.find_by(id: current_edit.upload_id)
+    render json: {
+      current_user: current_user,
+      current_image: current_image,
+      current_edit: current_edit
+    }
+  end
 end
 
 

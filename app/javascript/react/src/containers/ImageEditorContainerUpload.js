@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ImageEditor from '../components/ImageEditor';
 
-class ImageEditorContainer extends Component {
+class ImageEditorContainerUpload extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -37,7 +37,7 @@ class ImageEditorContainer extends Component {
       that.setState({
         current_user: body.current_user,
         current_image: body.clicked_image,
-        current_edit: body.specific_edit
+        current_edit: {}
 
       })
     })
@@ -62,4 +62,4 @@ class ImageEditorContainer extends Component {
     )
   }
 }
-export default ImageEditorContainer
+export default ImageEditorContainerUpload
