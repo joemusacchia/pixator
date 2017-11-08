@@ -257,10 +257,12 @@ class ImageEditor extends Component {
           method: 'POST',
           body: JSON.stringify({ editorState: statePayLoad })
         })
-        // .then(response => response.json())
-        // .then(body => {
-        //
-        // })
+        .then(response => {
+          if (response.status === 204) {
+            let editSuccessful = document.getElementById("save-notice");
+            editSuccessful.innerHTML = "Edit saved sucessfully"
+          }
+        })
 
         // that.setState({current_edit: sliderRValue})
       }
@@ -376,6 +378,7 @@ class ImageEditor extends Component {
         </div>
         <div>
           <button id="save-state-button">Save edit</button>
+          <p id="save-notice"></p>
         </div>
         <h3>This is rendered in react</h3>
       </div>
