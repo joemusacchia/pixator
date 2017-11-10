@@ -8,8 +8,8 @@ class Api::V1::ExportsController < ApplicationController
     newExport.user = User.find_by(id: params["user_id"])
     newExport.upload = Upload.find_by(id: params["upload_id"])
 
-    if newExport.save
-      redirect_to root_path
-    end
+    newExport.save
+
+    redirect_to root_path
   end
 end

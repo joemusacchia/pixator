@@ -6,10 +6,11 @@ class IndexPage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      current_user: [],
+      current_user: {},
       uploads: [],
       edits: [],
-      exports: []
+      exports: [],
+      users: []
     }
     this.sendDataToAPI = this.sendDataToAPI.bind(this);
     this.readFile = this.readFile.bind(this)
@@ -37,7 +38,8 @@ class IndexPage extends Component {
         current_user: body.current_user,
         uploads: body.uploads,
         edits: body.edits,
-        exports: body.exports
+        exports: body.exports,
+        users: body.users
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -85,6 +87,9 @@ class IndexPage extends Component {
     let newUploadTiles;
     if (this.state.uploads.length > 0) {
       newUploadTiles = this.state.uploads.map(upload => {
+        let username = this.state.users.filter(user =>{
+          return upload.user_id === user.id
+        })
         return(
           <ImageTile
             key = {new Date().getTime() + upload.id}
@@ -93,6 +98,7 @@ class IndexPage extends Component {
             user_id = {upload.user_id}
             image_type_flag = {1}
             upload_id = {upload.id}
+            username = {username[0].username}
           />
         )
       })
@@ -109,6 +115,9 @@ class IndexPage extends Component {
             editedUpload = upload
           }
         })
+        let username = this.state.users.filter(user =>{
+          return edit.user_id === user.id
+        })
         return(
           <ImageTile
             key = {new Date().getTime() + edit.id + 12345}
@@ -117,6 +126,7 @@ class IndexPage extends Component {
             user_id = {edit.user_id}
             image_type_flag = {2}
             upload_id = {edit.upload_id}
+            username = {username[0].username}
           />
         )
       })
@@ -127,6 +137,9 @@ class IndexPage extends Component {
     let exportedImageTiles;
     if (this.state.exports.length > 0) {
       exportedImageTiles = this.state.exports.map(exportedImage => {
+        let username = this.state.users.filter(user =>{
+          return exportedImage.user_id === user.id
+        })
         return(
           <ImageTile
             key = {new Date().getTime() + exportedImage.id + 56789}
@@ -135,6 +148,7 @@ class IndexPage extends Component {
             user_id = {exportedImage.user_id}
             image_type_flag = {3}
             upload_id = {exportedImage.upload_id}
+            username = {username[0].username}
           />
         )
       })

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SliderTile from '../components/SliderTile';
+import { browserHistory } from 'react-router'
 // import 'images/rhino.jpg'
 
 class ImageEditor extends Component {
@@ -9,7 +10,8 @@ class ImageEditor extends Component {
     this.state = {
       current_user: this.props.current_user,
       current_image: this.props.current_image,
-      current_edit: this.props.current_edit
+      current_edit: this.props.current_edit,
+      redirect: false
     }
   }
 
@@ -190,7 +192,7 @@ class ImageEditor extends Component {
         let dataURL = currentCanvas.toDataURL()
 
         let upload_id = that.state.current_image.id
-        let user_id = that.state.current_user.user_id
+        let user_id = that.state.current_user.id
 
         let newBlob = dataURLtoBlob(dataURL)
         let lastSlashIndex = that.state.current_image.file.url.lastIndexOf("/")
@@ -200,7 +202,8 @@ class ImageEditor extends Component {
         let formPayLoad = new FormData();
         formPayLoad.append('share', file);
 
-
+        let uploadNotice = document.getElementById("upload-notice")
+        uploadNotice.innerHTML = "Exporting image..."
         fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/exports`, {
           credentials: 'same-origin',
           headers: {},
@@ -214,6 +217,13 @@ class ImageEditor extends Component {
             let errorMessage = `${response.status} (${response.statusText})`,
             error = new Error(errorMessage);
             throw(error);
+          }
+        })
+        .then(response => {
+          if (response.status === 200) {
+            browserHistory.push('/')
+            // that.setState({redirect: true})
+            // that.forceUpdate()
           }
         })
         .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -256,7 +266,7 @@ class ImageEditor extends Component {
           textBody: textToPaint
         }
 
-        let user_id = that.state.current_user.user_id
+        let user_id = that.state.current_user.id
         let upload_id = that.state.current_image.id
         if ((Object.keys(that.state.current_edit).length === 0) || (that.state.current_edit.user_id != user_id)) {
           fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits`,{
@@ -373,6 +383,12 @@ class ImageEditor extends Component {
       greenValue = `${this.state.current_edit.slider_g}`
       blueValue = `${this.state.current_edit.slider_b}`
     }
+
+
+     // if (this.state.redirect) {
+     //   debugger
+     //   return(<Redirect to='/'/>);
+     // }
     return(
       <div className="grid-container">
         {/* <canvas id="myCanvas" width="300" height="227"/> */}
@@ -421,6 +437,7 @@ class ImageEditor extends Component {
             <div className="button-group">
               <div>
                 <button id="upload-button">Upload image</button>
+                <p id="upload-notice"></p>
               </div>
               <div>
                 <button id="save-state-button">Save edit</button>

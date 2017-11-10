@@ -13,7 +13,7 @@ class Api::V1::EditsController < ApplicationController
     newEdit.slider_b = extracted_params["sliderBValue"]
     newEdit.text_body = extracted_params["textBody"]
     newEdit.upload = Upload.find_by(id: extracted_params["uploadedImage"]["id"])
-    newEdit.user = User.find_by(id: extracted_params["currentUser"]["user_id"])
+    newEdit.user = User.find_by(id: extracted_params["currentUser"]["id"])
 
     newEdit.save
 
