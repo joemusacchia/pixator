@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SliderTile from '../components/SliderTile';
+import { browserHistory } from 'react-router'
 // import 'images/rhino.jpg'
 
 class ImageEditor extends Component {
@@ -9,7 +10,8 @@ class ImageEditor extends Component {
     this.state = {
       current_user: this.props.current_user,
       current_image: this.props.current_image,
-      current_edit: this.props.current_edit
+      current_edit: this.props.current_edit,
+      redirect: false
     }
   }
 
@@ -216,6 +218,13 @@ class ImageEditor extends Component {
             throw(error);
           }
         })
+        .then(response => {
+          if (response.status === 200) {
+            browserHistory.push('/')
+            // that.setState({redirect: true})
+            // that.forceUpdate()
+          }
+        })
         .catch(error => console.error(`Error in fetch: ${error.message}`));
 
 
@@ -258,7 +267,6 @@ class ImageEditor extends Component {
 
         let user_id = that.state.current_user.id
         let upload_id = that.state.current_image.id
-        debugger
         if ((Object.keys(that.state.current_edit).length === 0) || (that.state.current_edit.user_id != user_id)) {
           fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits`,{
             credentials: 'same-origin',
@@ -374,6 +382,12 @@ class ImageEditor extends Component {
       greenValue = `${this.state.current_edit.slider_g}`
       blueValue = `${this.state.current_edit.slider_b}`
     }
+
+
+     // if (this.state.redirect) {
+     //   debugger
+     //   return(<Redirect to='/'/>);
+     // }
     return(
       <div className="grid-container">
         {/* <canvas id="myCanvas" width="300" height="227"/> */}
