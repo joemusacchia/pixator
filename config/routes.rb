@@ -23,5 +23,5 @@ Rails.application.routes.draw do
     end
   end
 
-  # get '*path', to: 'static_pages#index'
+  get '*path', to: 'static_pages#index'
 end

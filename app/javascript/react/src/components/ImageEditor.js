@@ -202,7 +202,8 @@ class ImageEditor extends Component {
         let formPayLoad = new FormData();
         formPayLoad.append('share', file);
 
-
+        let uploadNotice = document.getElementById("upload-notice")
+        uploadNotice.innerHTML = "Exporting image..."
         fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/exports`, {
           credentials: 'same-origin',
           headers: {},
@@ -436,6 +437,7 @@ class ImageEditor extends Component {
             <div className="button-group">
               <div>
                 <button id="upload-button">Upload image</button>
+                <p id="upload-notice"></p>
               </div>
               <div>
                 <button id="save-state-button">Save edit</button>
