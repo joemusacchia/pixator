@@ -1,8 +1,49 @@
 #myCanvas {
   max-height: 600px;
-  max-width: 1000px
+  max-width: 90%;
+  margin: 3%;
+  align: right;
 }
 
 #canvasText {
   resize: none;
+}
+
+.editor-elements {
+  display: inline-block;
+  margin: 0%;
+}
+
+.editor-elements .editor-controls {
+  /*height: 800px;*/
+  min-height: 500px;
+}
+
+.slider-tile {
+  width: 100%;
+  margin: 10px 0px;
+  padding: 0%;
+}
+
+.editor-panels {
+  vertical-align: top;
+}
+
+.editor-controls p {
+  margin-bottom: 0px;
+}
+.slider-group {
+  margin: 0px 10px;
+}
+.text-field {
+  margin: 0px 10px;
+}
+.button-group {
+  padding: 0px 10px;
+  /*margin: 0px 10px;*/
+}
+
+.controls-title {
+  margin-bottom: 20px;
+  margin-left: 10px;
 }

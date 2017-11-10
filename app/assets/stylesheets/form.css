@@ -1,9 +1,10 @@
 /*@import url('https://fonts.googleapis.com/css?family=Ropa+Sans');*/
-@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');
+/*@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');*/
+@import url('https://fonts.googleapis.com/css?family=Patua+One');
 
-.login-page {
+.login-pages {
   position: absolute;
-  width: 200px;
+  width: 250px;
   margin: auto;
   top: 10%;
   right: 0;
@@ -14,7 +15,8 @@
 
 .form-container {
   /*font-family: 'Ropa Sans', sans-serif;*/
-  font-family: 'PT Sans Caption', sans-serif;
+  /*font-family: 'PT Sans Caption', sans-serif;*/
+
 }
 
 .actions input {
@@ -37,6 +39,7 @@
   font-size: 52px;
   text-align: center;
   margin: 0 auto;
+  font-family: 'Patua One', cursive;
 }
 
 p.alert{

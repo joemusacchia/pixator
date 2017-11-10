@@ -111,7 +111,7 @@ class IndexPage extends Component {
         })
         return(
           <ImageTile
-            key = {new Date().getTime() + edit.id}
+            key = {new Date().getTime() + edit.id + 12345}
             id = {edit.id}
             image = {editedUpload.file}
             user_id = {edit.user_id}
@@ -129,7 +129,7 @@ class IndexPage extends Component {
       exportedImageTiles = this.state.exports.map(exportedImage => {
         return(
           <ImageTile
-            key = {new Date().getTime() + exportedImage.id}
+            key = {new Date().getTime() + exportedImage.id + 56789}
             id = {exportedImage.id}
             image = {exportedImage.share}
             user_id = {exportedImage.user_id}
@@ -144,21 +144,65 @@ class IndexPage extends Component {
     }
 
     return(
-      <div>
-        <h1>Index page</h1>
-        <div className="image-upload">
-          <input id="inp" type='file' onChange={(e) => this.readFile(e.target.files)}/>
+      <div className="index-page">
+        <div className="grid-container">
+          <div className="grid-x page-intro">
+            <div className="large-10 medium-10 small-10 large-offset-1 medium-offset-1 small-offset-1 cell">
+              <h2 className="welcome">Welcome!</h2>
+              <h5>Pixator is a collaborative image editing tool. You can upload images and save your progress inside the editor.
+                Other users can access your edits and save their changes as new edits.
+                When you are satisfied with your edit, you can export it to be saved here!
+
+                <br/><br/>Enjoy!
+              </h5>
+            </div>
+          </div>
         </div>
-        <div className="image-tile-container">
-          {newUploadTiles}
+        <div className="grid-container">
+          <div className="grid-x upload-header">
+            <div className="small-1 medium-1 large-1 large-offset-1 medium-offset-1 small-offset-1 cell image-upload">
+              <h3>Uploads</h3>
+            </div>
+            <div className="small-3 medium-3 large-3 large-offset-6 medium-offset-6 small-offset-6 cell image-upload">
+              <div className="upload-button-wrapper">
+                <button className="upload-button">Upload a new image</button>
+                <input id="inp" type='file' title=" " onChange={(e) => this.readFile(e.target.files)}/>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="image-tile-container">
-          {editedImageTiles}
+
+        <div className="grid-container">
+          <div className="grid-x image-tile-container">
+            {newUploadTiles}
+          </div>
         </div>
-        <div className="image-tile-container">
-          {exportedImageTiles}
+
+        <div className="grid-container">
+          <div className="grid-x upload-header">
+            <div className="small-1 medium-1 large-1 large-offset-1 medium-offset-1 small-offset-1 cell">
+              <h3>Edits</h3>
+            </div>
+          </div>
         </div>
-        <Link to='/images'>Image editor</Link>
+        <div className="grid-container">
+          <div className="grid-x image-tile-container">
+            {editedImageTiles}
+          </div>
+        </div>
+
+        <div className="grid-container">
+          <div className="grid-x upload-header">
+            <div className="small-1 medium-1 large-1 large-offset-1 medium-offset-1 small-offset-1 cell">
+              <h3>Exports</h3>
+            </div>
+          </div>
+        </div>
+        <div className="grid-container">
+          <div className="grid-x image-tile-container">
+            {exportedImageTiles}
+          </div>
+        </div>
       </div>
     )
   }

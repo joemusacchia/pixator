@@ -28,13 +28,17 @@ class ExportShowPage extends Component {
   render() {
     let imageToLoad;
     if (Object.keys(this.state.current_export).length > 0) {
-      imageToLoad = <img src={this.state.current_export.share.url} />
+      imageToLoad = <img className='show-page-image' src={this.state.current_export.share.url} />
     } else {
       imageToLoad = <div></div>
     }
     return(
-      <div>
-        {imageToLoad}
+      <div className="grid-container">
+        <div className="grid-x">
+          <div className="small-10 medium-8 large-6 large-offset-3 medium-offset-2 small-offset-1 cell">
+            {imageToLoad}
+          </div>
+        </div>
       </div>
     )
   }

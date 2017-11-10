@@ -1,13 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Patua+One');
 .nav-bar {
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
+  /*-webkit-text-stroke-width: 1px;*/
+  /*-webkit-text-stroke-color: white;*/
+  background-color: black;
+  color: white;
 }
 
 .user-links {
-  text-align: right;
-  display: inline-block;
 }
 
-.title-link {
-  
+
+.nav-bar-links {
+  text-align: center;
+  position: relative;
+  /*top: 10px;*/
+  margin: 0%;
+  background-color: black;
+  vertical-align: middle;
+}
+
+.nav-bar-links:hover {
+  background-color: black;
+}
+
+.nav-bar #title-link {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+  font-family: 'Patua One', cursive;
+  color: black;
+  font-size: 2.2em;
 }
