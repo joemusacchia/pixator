@@ -436,11 +436,11 @@ class ImageEditor extends Component {
             </div>
             <div className="button-group">
               <div>
-                <button id="upload-button">Upload image</button>
+                <button className="upload-button" id="upload-button">Upload image</button>
                 <p id="upload-notice"></p>
               </div>
               <div>
-                <button id="save-state-button">Save edit</button>
+                <button className="upload-button" id="save-state-button">Save edit</button>
                 <p id="save-notice"></p>
               </div>
             </div>

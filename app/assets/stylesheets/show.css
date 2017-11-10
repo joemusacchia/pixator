@@ -1,4 +1,19 @@
 .show-page-image {
   width: 100%;
   padding-top: 20px;
+  vertical-align: baseline;
+}
+
+.show-page-panels {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.show-page-text {
+  padding-left: 20px;
+  margin-top: 50px;
+}
+
+.show-page-text p {
+  font-size: 1.3em;
 }
