@@ -52,7 +52,7 @@ class ImageEditorContainerUpload extends Component {
       imageEditorComponent = <ImageEditor
         key={1}
         id={1}
-        current_user={this.state.current_image}
+        current_user={this.state.current_user}
         current_image={this.state.current_image}
         current_edit={this.state.current_edit}
       />

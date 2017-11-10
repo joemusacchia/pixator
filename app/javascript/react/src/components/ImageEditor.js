@@ -190,7 +190,7 @@ class ImageEditor extends Component {
         let dataURL = currentCanvas.toDataURL()
 
         let upload_id = that.state.current_image.id
-        let user_id = that.state.current_user.user_id
+        let user_id = that.state.current_user.id
 
         let newBlob = dataURLtoBlob(dataURL)
         let lastSlashIndex = that.state.current_image.file.url.lastIndexOf("/")
@@ -256,8 +256,9 @@ class ImageEditor extends Component {
           textBody: textToPaint
         }
 
-        let user_id = that.state.current_user.user_id
+        let user_id = that.state.current_user.id
         let upload_id = that.state.current_image.id
+        debugger
         if ((Object.keys(that.state.current_edit).length === 0) || (that.state.current_edit.user_id != user_id)) {
           fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits`,{
             credentials: 'same-origin',

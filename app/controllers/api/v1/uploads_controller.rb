@@ -17,7 +17,8 @@ class Api::V1::UploadsController < ApplicationController
       current_user: current_user,
       uploads: Upload.all,
       edits: Edit.all,
-      exports: Export.all
+      exports: Export.all,
+      users: User.all
     }
   end
 end
