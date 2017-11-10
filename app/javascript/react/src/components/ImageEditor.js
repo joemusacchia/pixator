@@ -60,9 +60,12 @@ class ImageEditor extends Component {
       let sliderB = document.getElementById('3');
       let textToPaint = ""
 
+      let canvasTextField = document.getElementById("canvasText")
+
 
       if (Object.keys(that.state.current_edit).length != 0) {
         textToPaint = that.state.current_edit.text_body
+        canvasTextField.value = textToPaint
 
         let getRSliderFloat = sliderR.valueAsNumber/255
         let getGSliderFloat = sliderG.valueAsNumber/255
@@ -77,7 +80,9 @@ class ImageEditor extends Component {
         ctx.textBaseline = 'top';
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
-        ctx.fillStyle = '#ffffff'
+        ctx.fillStyle = '#ffffff';
+        // textWidth = ctx.measureText(textToPaint ).width;
+        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
       }
 
@@ -97,9 +102,10 @@ class ImageEditor extends Component {
         ctx.textBaseline = 'top';
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
-        ctx.fillStyle = '#ffffff'
+        ctx.fillStyle = '#ffffff';
+        // textWidth = ctx.measureText(textToPaint ).width;
+        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
-        that.setState({})
       }
 
 
@@ -113,7 +119,9 @@ class ImageEditor extends Component {
         ctx.textBaseline = 'top';
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
-        ctx.fillStyle = '#ffffff'
+        ctx.fillStyle = '#ffffff';
+        // textWidth = ctx.measureText(textToPaint ).width;
+        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
       }
 
@@ -128,7 +136,9 @@ class ImageEditor extends Component {
         ctx.textBaseline = 'top';
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
-        ctx.fillStyle = '#ffffff'
+        ctx.fillStyle = '#ffffff';
+        // textWidth = ctx.measureText(textToPaint ).width;
+        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
       }
 
@@ -248,19 +258,41 @@ class ImageEditor extends Component {
 
         let user_id = that.state.current_user.user_id
         let upload_id = that.state.current_image.id
-        fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits`,{
-          credentials: 'same-origin',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify({ editorState: statePayLoad })
-        })
-        // .then(response => response.json())
-        // .then(body => {
-        //
-        // })
+        if ((Object.keys(that.state.current_edit).length === 0) || (that.state.current_edit.user_id != user_id)) {
+          fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits`,{
+            credentials: 'same-origin',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({ editorState: statePayLoad })
+          })
+          .then(response => {
+            if (response.status === 204) {
+              let editSuccessful = document.getElementById("save-notice");
+              editSuccessful.innerHTML = "Edit saved sucessfully"
+            }
+          })
+
+        } else if (that.state.current_edit.user_id === user_id) {
+          let edit_id = that.state.current_edit.id
+          fetch(`/api/v1/users/${user_id}/uploads/${upload_id}/edits/${edit_id}`,{
+            credentials: 'same-origin',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: 'PATCH',
+            body: JSON.stringify({ editorState: statePayLoad })
+          })
+          .then(response => {
+            if (response.status === 204) {
+              let editSuccessful = document.getElementById("save-notice");
+              editSuccessful.innerHTML = "Edit saved sucessfully"
+            }
+          })
+        }
 
         // that.setState({current_edit: sliderRValue})
       }
@@ -270,7 +302,12 @@ class ImageEditor extends Component {
 
 
 
-      let canvasTextField = document.getElementById("canvasText")
+
+
+
+
+
+
 
       let handleTextChange = (event) => {
         textToPaint = event.target.value
@@ -288,6 +325,8 @@ class ImageEditor extends Component {
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
         ctx.fillStyle = '#ffffff'
+        // textWidth = ctx.measureText(textToPaint ).width;
+        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
 
       }
@@ -335,49 +374,61 @@ class ImageEditor extends Component {
       blueValue = `${this.state.current_edit.slider_b}`
     }
     return(
-      <div>
+      <div className="grid-container">
         {/* <canvas id="myCanvas" width="300" height="227"/> */}
         {/* <canvas id="myCanvas" width="500" height="500"/> */}
-        <canvas id="myCanvas"/>
-        <div>
-          <SliderTile
-            key = {1}
-            id = {"1"}
-            value = {redValue}
-          />
-        </div>
-        <div>
-          <SliderTile
-            key = {2}
-            id = {"2"}
-            value = {greenValue}
-          />
-        </div>
-        <div>
-          <SliderTile
-            key = {3}
-            id = {"3"}
-            value = {blueValue}
-          />
-        </div>
-        <div>
-          <form>
-            <label>Text onto canvas
-              <input
-                id={"canvasText"}
-                name={"canvasText"}
-                type="text"
+        <div className="grid-x editor-panels">
+          <div className="small-12 large-6 large-offset-1 cell editor-elements">
+            <canvas id="myCanvas"/>
+          </div>
+          <div className="small-12 large-4 cell editor-elements editor-controls">
+            <h3 className="controls-title">Slider controls:</h3>
+            <div className="slider-group">
+              <p>Red channel</p>
+              <SliderTile
+                key = {1}
+                id = {"1"}
+                value = {redValue}
               />
-            </label>
-          </form>
+            </div>
+            <div className="slider-group">
+              <p>Green channel</p>
+              <SliderTile
+                key = {2}
+                id = {"2"}
+                value = {greenValue}
+              />
+            </div>
+            <div className="slider-group">
+              <p>Blue channel</p>
+              <SliderTile
+                key = {3}
+                id = {"3"}
+                value = {blueValue}
+              />
+            </div>
+            <div className="text-field">
+              <form>
+                <label>Text onto canvas
+                  <textarea
+                    id={"canvasText"}
+                    name={"canvasText"}
+                    type="text"
+                  />
+                </label>
+              </form>
+            </div>
+            <div className="button-group">
+              <div>
+                <button id="upload-button">Upload image</button>
+              </div>
+              <div>
+                <button id="save-state-button">Save edit</button>
+                <p id="save-notice"></p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <button id="upload-button">Upload image</button>
-        </div>
-        <div>
-          <button id="save-state-button">Save edit</button>
-        </div>
-        <h3>This is rendered in react</h3>
       </div>
     )
   }

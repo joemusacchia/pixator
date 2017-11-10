@@ -20,6 +20,14 @@ class Api::V1::EditsController < ApplicationController
   end
 
   def update
+    edit_record_to_patch = Edit.find_by(id: params["id"])
+
+    edit_record_to_patch.update(
+      slider_r: params["editorState"]["sliderRValue"],
+      slider_g: params["editorState"]["sliderGValue"],
+      slider_b: params["editorState"]["sliderBValue"],
+      text_body: params["editorState"]["textBody"]
+    )
   end
 
   def show

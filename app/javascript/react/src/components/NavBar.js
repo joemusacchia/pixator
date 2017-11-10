@@ -3,14 +3,11 @@ import { Link } from 'react-router';
 
 const NavBar = props => {
   return(
-    <div>
-      <div className='nav-bar'>
-        <span className='title-link'>
-          <Link to='/'><p>Pixator</p></Link>
-        </span>
-        <span className='user-links'>
-          <a data-method="delete" rel="nofollow" href="/users/sign_out"><p>Sign out</p></a>
-        </span>
+    <div className = "grid-container">
+      <div className='grid-x nav-bar' data-options="is_hover: false">
+        {/* <Link to='/' className='nav-bar-links'>Pixator</Link> */}
+        <Link to='/'><button id="title-link" className='small-12 medium-6 large-2 cell nav-bar-links'>Pixator</button></Link>
+        <a data-method="delete" rel="nofollow" href="/users/sign_out" ><button className='small-12 medium-6 large-2 large-offset-8 cell nav-bar-links'>Sign out</button></a>
       </div>
       {props.children}
     </div>

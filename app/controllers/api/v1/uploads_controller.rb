@@ -7,8 +7,9 @@ class Api::V1::UploadsController < ApplicationController
     newImage = Upload.new
     newImage.file = params["file"]
     newImage.user = current_user
-    newImage.save
-    render json: Upload.last
+    if newImage.save
+      render json: Upload.last
+    end
   end
 
   def index

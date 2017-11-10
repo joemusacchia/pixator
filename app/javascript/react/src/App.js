@@ -12,9 +12,9 @@ const App = props => {
     <Router history={browserHistory}>
       <Route path='/' component={NavBar}>
         <IndexRoute component={IndexPage}/>
-        <Route path='/users/:user_id/uploads/:id' component={ImageEditorContainerUpload}/>
+        <Route path='/editor/users/:user_id/uploads/:id' component={ImageEditorContainerUpload}/>
         <Route path='/edits/:id' component={ImageEditorContainerEdit}/>
-        <Route path='/users/:user_id/uploads/:upload_id/exports/:id' component={ExportShowPage}/>
+        <Route path='/exported/users/:user_id/uploads/:upload_id/exports/:id' component={ExportShowPage}/>
       </Route>
     </Router>
   )
