@@ -48,6 +48,10 @@ body {
   padding: 0%;
 }
 
+.image-upload .upload-button-wrapper .button-dropzone {
+  text-align: right;
+}
+
 .page-intro {
   /*margin-left: 4em;*/
 }
@@ -61,24 +65,27 @@ body {
 }
 
 .upload-button {
-  background-color: #0E8EB6;
+  background-color: #353437;
   transition-delay: 0s;
   transition-duration: 0.3s;
   transition-property: background-color;
   transition-timing-function: ease-out;
+  color: white;
+  border: 2px solid #353437;
+  border-radius: 20px;
+}
+button:focus {
+  outline: none;
+}
+
+.upload-button:focus {
+  background-color: #353437;
+  color: white;
 }
 
 .upload-button:hover{
-  background-color: #1f657c;
-}
-
-.upload-button-wrapper input[type=file] {
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  vertical-align: middle;
-  height: 100%;
+  background-color: #EDECF4;
+  color: #353437;
 }
 
 .welcome {

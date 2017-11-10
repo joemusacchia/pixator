@@ -23,6 +23,10 @@
   background-color: black;
 }
 
+.nav-bar-links:focus {
+  background-color: black;
+}
+
 .nav-bar #title-link {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;

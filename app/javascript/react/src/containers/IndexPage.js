@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import ImageTile from '../components/ImageTile'
+import Dropzone from 'react-dropzone'
 
 class IndexPage extends Component {
   constructor(props){
@@ -178,10 +179,11 @@ class IndexPage extends Component {
               <h3>Uploads</h3>
             </div>
             <div className="small-3 medium-3 large-3 large-offset-6 medium-offset-6 small-offset-6 cell image-upload">
-              <div className="upload-button-wrapper">
-                <button className="upload-button">Upload a new image</button>
-                <input id="inp" type='file' title=" " onChange={(e) => this.readFile(e.target.files)}/>
-              </div>
+                <div className="upload-button-wrapper">
+                  <Dropzone onDrop={this.readFile} className="button-dropzone">
+                    <button className="upload-button">Upload a new image</button>
+                  </Dropzone>
+                </div>
             </div>
           </div>
         </div>
