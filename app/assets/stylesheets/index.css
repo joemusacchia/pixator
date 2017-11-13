@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo');
-@import url('https://fonts.googleapis.com/css?family=Exo');
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Exo', sans-serif;
 }
@@ -20,21 +20,12 @@ body {
 
 .image-tile {
   box-sizing: border-box;
-  /*margin: 3% 2%;*/
   padding: 2%;
   display: inline-block;
-  /*width: 100px;*/
-  /*max-height: 100px;*/
-  /*overflow: hidden;*/
-  /*margin: 5px;*/
-  /*margin: 0 auto;*/
   text-align: center;
 }
 
 .upload-header {
-  /*text-align: center;*/
-  /*position: relative;*/
-  /*top: 10px;*/
   margin-top: 1.5em;
   padding: 0%;
 }

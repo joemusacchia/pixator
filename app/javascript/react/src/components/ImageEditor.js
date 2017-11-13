@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SliderTile from '../components/SliderTile';
 import { browserHistory } from 'react-router'
-// import 'images/rhino.jpg'
 
 class ImageEditor extends Component {
   constructor(props){
@@ -24,9 +23,9 @@ class ImageEditor extends Component {
     let that = this;
 
     let img = new Image();
-    // img.src = 'https://s3.amazonaws.com/starcation-new-development/uploads/celestial/photo/1/Jupiter_and_its_shrunken_Great_Red_Spot.jpg';
+
     img.crossOrigin = "Anonymous";
-    // img.src = this.state.current_image.file.url + "?edit=1"
+
     img.src = this.state.current_image.file.url
     img.onload = function() {
       // grab initial data;
@@ -35,10 +34,6 @@ class ImageEditor extends Component {
       canvasOringinal.setAttribute("height", `${img.naturalHeight}`)
       let ctxOriginal = canvasOringinal.getContext('2d');
       ctxOriginal.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
-      // ctxOriginal.textBaseline = 'top';
-      // ctxOriginal.font = "100px Arial"
-      // ctxOriginal.fillStyle = '#ffffff'
-      // ctxOriginal.fillText("Joe", 10, 10);
       img.style.display = 'none';
       let originalImageData = ctxOriginal.getImageData(0, 0, canvasOringinal.width, canvasOringinal.height)
       let originalData = originalImageData.data;
@@ -52,7 +47,6 @@ class ImageEditor extends Component {
       let ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
       ctx.fillStyle = '#ffffff'
-      // ctx.fillText("Joe", 10, 10);
       img.style.display = 'none';
       let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       let data = imageData.data;
@@ -83,8 +77,6 @@ class ImageEditor extends Component {
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
         ctx.fillStyle = '#ffffff';
-        // textWidth = ctx.measureText(textToPaint ).width;
-        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
       }
 
@@ -95,7 +87,6 @@ class ImageEditor extends Component {
 
 
       let changeRChannel = () => {
-        // console.log(sliderR.valueAsNumber)
         let sliderValue8Bit = sliderR.valueAsNumber/255
         let i
         for (i = 0; i < data.length; i += 4) {
@@ -105,14 +96,11 @@ class ImageEditor extends Component {
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
         ctx.fillStyle = '#ffffff';
-        // textWidth = ctx.measureText(textToPaint ).width;
-        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
       }
 
 
       let changeGChannel = () => {
-        // console.log(sliderG.valueAsNumber)
         let sliderValue8Bit = sliderG.valueAsNumber/255
         let i
         for (i = 0; i < data.length; i += 4) {
@@ -122,14 +110,11 @@ class ImageEditor extends Component {
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
         ctx.fillStyle = '#ffffff';
-        // textWidth = ctx.measureText(textToPaint ).width;
-        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
       }
 
 
       let changeBChannel = () => {
-        // console.log(sliderB.valueAsNumber)
         let sliderValue8Bit = sliderB.valueAsNumber/255
         let i
         for (i = 0; i < data.length; i += 4) {
@@ -139,49 +124,12 @@ class ImageEditor extends Component {
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
         ctx.fillStyle = '#ffffff';
-        // textWidth = ctx.measureText(textToPaint ).width;
-        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
       }
 
       sliderR.addEventListener('input',changeRChannel);
       sliderG.addEventListener('input',changeGChannel);
       sliderB.addEventListener('input',changeBChannel);
-
-
-
-
-
-      // let sliderR = document.getElementById('1');
-      // let sliderG = document.getElementById('2');
-      // let sliderB = document.getElementById('3');
-      //
-      // let changeSliderValue = (id_number) => {
-      //   // console.log(sliderB.valueAsNumber)
-      //   let sliderValue8Bit = sliderB.valueAsNumber/255
-      //   let i
-      //   for (i = 0; i < data.length; i += 4) {
-      //     data[id_number] = Math.round(originalData[id_number] * sliderValue8Bit)
-      //   }
-      //   ctx.textBaseline = 'top';
-      //   ctx.font = "100px Arial"
-      //   ctx.putImageData(imageData, 0, 0)
-      //   ctx.fillStyle = '#ffffff'
-      //   ctx.fillText("Joe", 10, 10);
-      // }
-      //
-      // let redWrapper = () => {
-      //   changeSliderValue(1)
-      // }
-      //
-      //
-      //
-      // sliderR.addEventListener('input', redWrapper);
-      // sliderG.addEventListener('input',changeSliderValue(2));
-      // sliderB.addEventListener('input',changeSliderValue(3));
-
-
-
 
 
 
@@ -222,8 +170,6 @@ class ImageEditor extends Component {
         .then(response => {
           if (response.status === 200) {
             browserHistory.push('/')
-            // that.setState({redirect: true})
-            // that.forceUpdate()
           }
         })
         .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -304,15 +250,10 @@ class ImageEditor extends Component {
           })
         }
 
-        // that.setState({current_edit: sliderRValue})
       }
 
       let saveStateButton = document.getElementById('save-state-button')
       saveStateButton.addEventListener('click', saveEditorState)
-
-
-
-
 
 
 
@@ -335,35 +276,12 @@ class ImageEditor extends Component {
         ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
         ctx.fillStyle = '#ffffff'
-        // textWidth = ctx.measureText(textToPaint ).width;
-        // ctx.fillText(textToPaint , (canvas.width/2) - (textWidth / 2), 10);
         ctx.fillText(textToPaint, 10, 10);
 
       }
 
       canvasTextField.addEventListener('change', handleTextChange)
       canvasTextField.addEventListener('keyup', handleTextChange)
-
-      // let textAreaElement = document.getElementById("canvasText");
-      //
-      // textAreaElement.onkeyup = function() {
-      //   textToPaint = textAreaElement.value
-      //   let getRSliderFloat = sliderR.valueAsNumber/255
-      //   let getGSliderFloat = sliderG.valueAsNumber/255
-      //   let getBSliderFloat = sliderB.valueAsNumber/255
-      //
-      //   let i
-      //   for (i = 0; i < data.length; i += 4) {
-      //     data[i] = Math.round(originalData[i] * getRSliderFloat)
-      //     data[i + 1] = Math.round(originalData[i + 1] * getGSliderFloat)
-      //     data[i + 2] = Math.round(originalData[i + 2] * getBSliderFloat)
-      //   }
-      //   ctx.textBaseline = 'top';
-      //   ctx.font = "100px Arial"
-      //   ctx.putImageData(imageData, 0, 0)
-      //   ctx.fillStyle = '#ffffff'
-      //   ctx.fillText(textToPaint, 10, 10);
-      // }
 
 
 
@@ -385,14 +303,8 @@ class ImageEditor extends Component {
     }
 
 
-     // if (this.state.redirect) {
-     //   debugger
-     //   return(<Redirect to='/'/>);
-     // }
     return(
       <div className="grid-container">
-        {/* <canvas id="myCanvas" width="300" height="227"/> */}
-        {/* <canvas id="myCanvas" width="500" height="500"/> */}
         <div className="grid-x editor-panels">
           <div className="small-12 large-6 large-offset-1 cell editor-elements">
             <canvas id="myCanvas"/>

@@ -1,0 +1,44 @@
+.comment-tile {
+  background-color: white;
+  margin: 0.5em;
+  box-shadow: 0px 0px 3px gray;
+}
+
+.comment-form-tile {
+  display: inline-block;
+}
+
+.comment-contents {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.5em;
+}
+
+.comment-username {
+  font-weight: bold;
+  font-size: 0.9em;
+  overflow: hidden;
+}
+
+.comment-contents-left-panel {
+  text-align: right;
+  position: relative;
+}
+
+.comment-contents-left-panel:after {
+  content:"";
+  background: black;
+  position: absolute;
+  bottom: 10%;
+  right: 0;
+  height: 80%;
+  width: 1px;
+}
+
+.comment-date {
+  font-size: 0.9em;
+}
+
+#no-comments-message {
+  padding: 0.5em;
+}

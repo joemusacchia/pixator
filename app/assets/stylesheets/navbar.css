@@ -1,19 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Patua+One');
 .nav-bar {
-  /*-webkit-text-stroke-width: 1px;*/
-  /*-webkit-text-stroke-color: white;*/
   background-color: black;
   color: white;
-}
-
-.user-links {
 }
 
 
 .nav-bar-links {
   text-align: center;
   position: relative;
-  /*top: 10px;*/
   margin: 0%;
   background-color: black;
   vertical-align: middle;

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ExportUserInfo from '../components/ExportUserInfo'
+import CommentTile from '../components/CommentTile'
+import FormTile from '../components/FormTile'
 
 class ExportShowPage extends Component {
   constructor(props){
@@ -7,8 +9,10 @@ class ExportShowPage extends Component {
     this.state = {
       current_user: {},
       current_export: {},
-      user_info: []
+      user_info: [],
+      comments: []
     }
+    this.addNewComment = this.addNewComment.bind(this)
   }
 
   componentDidMount() {
@@ -23,7 +27,26 @@ class ExportShowPage extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      that.setState({current_user: body.current_user, current_export: body.current_export, user_info: body.user_info})
+      that.setState({current_user: body.current_user, current_export: body.current_export, user_info: body.user_info, comments: body.comments})
+    })
+  }
+
+  addNewComment(formPayLoad) {
+    let that = this
+    fetch(`/api/v1/comments`,{
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({ commentInfo: formPayLoad })
+    })
+    .then(response => response.json())
+    .then(body => {
+      let commentsArray = that.state.comments;
+      commentsArray.unshift(body);
+      that.setState({comments: commentsArray})
     })
   }
 
@@ -44,16 +67,49 @@ class ExportShowPage extends Component {
       imageToLoad = <div></div>
       userInfoPanel = <div></div>
     }
+
+    let listOfComments;
+    if (this.state.comments.length > 0) {
+      listOfComments = this.state.comments.map(comment => {
+        createdAt = comment.comment.created_at
+        createdAt = (new Date(Date.parse(createdAt))).toString();
+        return(
+          <CommentTile
+            key = {comment.comment.id}
+            id = {comment.comment.id}
+            body = {comment.comment.body}
+            username = {comment.username}
+            createdAt = {createdAt}
+          />
+        )
+      })
+    } else {
+      listOfComments = <p id="no-comments-message" className = "small-10 medium-10 large-5 large-offset-1 medium-offset-1 small-offset-1 cell comment-tile">Let the creator know your thoughts by adding a comment!</p>
+    }
+
+
     return(
-      <div className="grid-container">
+      <div>
+        <div className="grid-container">
+          <div className="grid-x">
+            <div className="small-10 medium-5 large-5 large-offset-1 medium-offset-1 small-offset-1 cell show-page-panels">
+              {imageToLoad}
+            </div>
+            <div className="small-10 medium-5 large-5 medium-offset-1 small-offset-1 cell show-page-panels">
+              {userInfoPanel}
+            </div>
+          </div>
+        </div>
+
         <div className="grid-x">
-          {/* <div className="small-10 medium-8 large-6 large-offset-3 medium-offset-2 small-offset-1 cell"> */}
-          <div className="small-10 medium-5 large-5 large-offset-1 medium-offset-1 small-offset-1 cell show-page-panels">
-            {imageToLoad}
+          <div className="small-10 medium-10 large-5 large-offset-1 medium-offset-1 small-offset-1 cell comment-form-tile">
+            <FormTile
+              addNewComment = {this.addNewComment}
+              current_user = {this.state.current_user}
+              current_export = {this.state.current_export}
+            />
           </div>
-          <div className="small-10 medium-5 large-5 medium-offset-1 small-offset-1 cell show-page-panels">
-            {userInfoPanel}
-          </div>
+          {listOfComments}
         </div>
       </div>
     )
