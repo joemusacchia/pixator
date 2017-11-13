@@ -32,7 +32,6 @@ class ImageEditorContainerEdit extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      // debugger
       that.setState({
         current_user: body.current_user,
         current_image: body.current_image,

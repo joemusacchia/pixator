@@ -15,7 +15,6 @@
 }
 
 .editor-elements .editor-controls {
-  /*height: 800px;*/
   min-height: 500px;
 }
 
@@ -32,15 +31,17 @@
 .editor-controls p {
   margin-bottom: 0px;
 }
+
 .slider-group {
   margin: 0px 10px;
 }
+
 .text-field {
   margin: 0px 10px;
 }
+
 .button-group {
   padding: 0px 10px;
-  /*margin: 0px 10px;*/
 }
 
 .controls-title {

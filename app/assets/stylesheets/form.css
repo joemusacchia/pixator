@@ -16,7 +16,6 @@
 .form-container {
   /*font-family: 'Ropa Sans', sans-serif;*/
   /*font-family: 'PT Sans Caption', sans-serif;*/
-
 }
 
 .actions input {
@@ -44,4 +43,13 @@
 
 p.alert{
 
+}
+
+.add-comment-button {
+  display: inline-block;
+}
+
+.form-error-message {
+  display: inline-block;
+  margin-left: 20px;
 }
