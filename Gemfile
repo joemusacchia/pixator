@@ -39,10 +39,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
-  gem 'factory_girl'
+  gem 'factory_bot_rails'
   gem 'valid_attribute'
   gem 'shoulda'#, require: false
   gem 'dotenv-rails'
+  gem 'rack-test'
 end
 
 group :development do
