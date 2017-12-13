@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.5'
 
 
 ### joemusacchia added these gems
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.4.5.0'
 gem 'webpacker'
 gem 'devise'
 gem 'carrierwave', '~>1.0'
@@ -42,6 +42,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'valid_attribute'
   gem 'shoulda'#, require: false
+  gem 'shoulda-matchers', require: false
   gem 'dotenv-rails'
   gem 'rack-test'
 end
