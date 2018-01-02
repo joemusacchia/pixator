@@ -261,7 +261,6 @@ class ImageEditor extends Component {
 
 
       let handleTextChange = (event) => {
-        textToPaint = event.target.value
         let getRSliderFloat = sliderR.valueAsNumber/255
         let getGSliderFloat = sliderG.valueAsNumber/255
         let getBSliderFloat = sliderB.valueAsNumber/255
@@ -272,11 +271,20 @@ class ImageEditor extends Component {
           data[i + 1] = Math.round(originalData[i + 1] * getGSliderFloat)
           data[i + 2] = Math.round(originalData[i + 2] * getBSliderFloat)
         }
-        ctx.textBaseline = 'top';
-        ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
-        ctx.fillStyle = '#ffffff'
-        ctx.fillText(textToPaint, 10, 10);
+
+        let rawText = event.target.value
+        let splitText = rawText.split('\n');
+        for (let i = 0; i < splitText.length; i++) {
+          ctx.font = "100px Impact";
+          ctx.fillStyle = '#ffffff';
+          ctx.textBaseline = 'top';
+          ctx.textAlign = 'center';
+          ctx.strokeStyle = 'black';
+          ctx.lineWidth = 10;
+          ctx.strokeText(splitText[i], canvas.width/2, (100 * i));
+          ctx.fillText(splitText[i], canvas.width/2, (100 * i));
+        }
 
       }
 
