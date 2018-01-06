@@ -73,11 +73,20 @@ class ImageEditor extends Component {
           data[i + 1] = Math.round(originalData[i + 1] * getGSliderFloat)
           data[i + 2] = Math.round(originalData[i + 2] * getBSliderFloat)
         }
-        ctx.textBaseline = 'top';
-        ctx.font = "100px Arial"
+
         ctx.putImageData(imageData, 0, 0)
+
+        let splitText = textToPaint.split('\n');
+        ctx.font = "100px Impact";
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(textToPaint, 10, 10);
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 10;
+        for (let i = 0; i < splitText.length; i++) {
+          ctx.strokeText(splitText[i], canvas.width/2, (100 * i));
+          ctx.fillText(splitText[i], canvas.width/2, (100 * i));
+        }
       }
 
 
@@ -86,17 +95,28 @@ class ImageEditor extends Component {
 
 
 
+      // Future version of this code will be DRY'ed up and all of the text rendering
+      // will be defined in a JS class; maybe even instantiate all of the canvas
+      // code in that class
       let changeRChannel = () => {
         let sliderValue8Bit = sliderR.valueAsNumber/255
         let i
         for (i = 0; i < data.length; i += 4) {
           data[i] = Math.round(originalData[i] * sliderValue8Bit)
         }
-        ctx.textBaseline = 'top';
-        ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
+
+        let splitText = textToPaint.split('\n');
+        ctx.font = "100px Impact";
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(textToPaint, 10, 10);
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 10;
+        for (let i = 0; i < splitText.length; i++) {
+          ctx.strokeText(splitText[i], canvas.width/2, (100 * i));
+          ctx.fillText(splitText[i], canvas.width/2, (100 * i));
+        }
       }
 
 
@@ -106,11 +126,19 @@ class ImageEditor extends Component {
         for (i = 0; i < data.length; i += 4) {
           data[i + 1] = Math.round(originalData[i + 1] * sliderValue8Bit)
         }
-        ctx.textBaseline = 'top';
-        ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
+
+        let splitText = textToPaint.split('\n');
+        ctx.font = "100px Impact";
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(textToPaint, 10, 10);
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 10;
+        for (let i = 0; i < splitText.length; i++) {
+          ctx.strokeText(splitText[i], canvas.width/2, (100 * i));
+          ctx.fillText(splitText[i], canvas.width/2, (100 * i));
+        }
       }
 
 
@@ -120,11 +148,19 @@ class ImageEditor extends Component {
         for (i = 0; i < data.length; i += 4) {
           data[i + 2] = Math.round(originalData[i + 2] * sliderValue8Bit)
         }
-        ctx.textBaseline = 'top';
-        ctx.font = "100px Arial"
         ctx.putImageData(imageData, 0, 0)
+
+        let splitText = textToPaint.split('\n');
+        ctx.font = "100px Impact";
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(textToPaint, 10, 10);
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 10;
+        for (let i = 0; i < splitText.length; i++) {
+          ctx.strokeText(splitText[i], canvas.width/2, (100 * i));
+          ctx.fillText(splitText[i], canvas.width/2, (100 * i));
+        }
       }
 
       sliderR.addEventListener('input',changeRChannel);
@@ -273,15 +309,15 @@ class ImageEditor extends Component {
         }
         ctx.putImageData(imageData, 0, 0)
 
-        let rawText = event.target.value
-        let splitText = rawText.split('\n');
+        textToPaint = event.target.value
+        let splitText = textToPaint.split('\n');
+        ctx.font = "100px Impact";
+        ctx.fillStyle = '#ffffff';
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 10;
         for (let i = 0; i < splitText.length; i++) {
-          ctx.font = "100px Impact";
-          ctx.fillStyle = '#ffffff';
-          ctx.textBaseline = 'top';
-          ctx.textAlign = 'center';
-          ctx.strokeStyle = 'black';
-          ctx.lineWidth = 10;
           ctx.strokeText(splitText[i], canvas.width/2, (100 * i));
           ctx.fillText(splitText[i], canvas.width/2, (100 * i));
         }
