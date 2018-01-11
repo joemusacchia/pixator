@@ -68,7 +68,7 @@ $ git clone https://github.com/joemusacchia/pixator.git
 ```
 $ cd pixator
 ```
-* To compress and resize images, `mini_magick` is used; this requires that the `imagemagick` dependecy be installed on the system before installing the gems:
+* To compress and resize images, `mini_magick` is used; this requires that the `imagemagick` dependency be installed on the system before installing the gems:
 ```
 $ brew install imagemagick
 ```
@@ -95,11 +95,17 @@ $ rails s
 ```
 $ ./bin/webpack-dev-server
 ```
-* Navigate to `localhost:3000` in your web browser and start using Pixator!
+* Navigate to `localhost:3000` in your web browser and start using the dev environment for Pixator!
+
+## Recent changes to Pixator
+
+* Added multi-line text support with impact and stroke text styling
 
 ## Dream features for Pixator
 
-* I would really love to integrate instagram authentication to allow users to seamlessly share edited photos to instagram
+* I would really love to integrate Instagram authentication to allow users to seamlessly share edited photos to Instagram
+* Automatic preview generation of edits for the index page to disambiguate edits across users and individual accounts
+* In line with preview generation, modify the UI on the index page to direct the user more clearly to the correct actions, disambiguating the functionality of the Uploads, Edits, and Exports panels
 * I plan on adding more filters to images, such as color saturation and exposure, to add value
-* To make the app work really well for generating memes, I plan on also adding user controls for styling of the text, with multi-line support
+* Provide more user controls for text so that users can more freely manipulate the font size and placement in the image
 * Pixator was designed to be extensible with many opportunities to add overall value
