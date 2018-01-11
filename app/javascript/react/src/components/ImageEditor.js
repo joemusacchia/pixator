@@ -42,6 +42,7 @@ class ImageEditor extends Component {
     }
 
     function changeSliderValue(img, originalData, that) {
+      var Color = require('color');
       //set initial state of canvas
       let canvas = document.getElementById('myCanvas');
       let ctx = canvas.getContext('2d');
@@ -54,6 +55,7 @@ class ImageEditor extends Component {
       let sliderR = document.getElementById('1');
       let sliderG = document.getElementById('2');
       let sliderB = document.getElementById('3');
+      let sliderColor = document.getElementById('4');
       let textToPaint = ""
 
       let canvasTextField = document.getElementById("canvasText")
