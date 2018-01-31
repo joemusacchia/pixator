@@ -100,6 +100,7 @@ $ ./bin/webpack-dev-server
 ## Recent changes to Pixator
 
 * Added multi-line text support with impact and stroke text styling
+* Added whitelisting for `jpeg/jpg` and `png` file types in the frontend and backend
 
 ## Dream features for Pixator
 
