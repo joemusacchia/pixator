@@ -180,7 +180,10 @@ class IndexPage extends Component {
             </div>
             <div className="small-3 medium-3 large-3 large-offset-6 medium-offset-6 small-offset-6 cell image-upload">
                 <div className="upload-button-wrapper">
-                  <Dropzone onDrop={this.readFile} className="button-dropzone">
+                  <Dropzone
+                    accept="image/jpeg, image/png"
+                    onDrop={this.readFile} className="button-dropzone"
+                  >
                     <button className="upload-button">Upload a new image</button>
                   </Dropzone>
                 </div>
